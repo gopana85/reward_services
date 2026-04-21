@@ -77,16 +77,6 @@ Sample response:
 }
 ```
 
-### 2. Get rewards for all customers
-
-`GET /api/rewards/customers?startDate=YYYY-MM-DD&endDate=YYYY-MM-DD`
-
-Example:
-
-```http
-GET /api/rewards/customers?startDate=2026-01-01&endDate=2026-03-31
-```
-
 ## Validation and Error Handling
 
 - `startDate` and `endDate` are optional
