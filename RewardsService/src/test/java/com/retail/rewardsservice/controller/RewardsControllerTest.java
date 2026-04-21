@@ -10,6 +10,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,6 +28,7 @@ class RewardsControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    @DisplayName("Return rewards for a single customer")
     void shouldReturnRewardsForSingleCustomer() throws Exception {
         mockMvc.perform(get("/api/rewards/customers/1")
                         .param("startDate", "2026-01-01")
@@ -40,6 +42,7 @@ class RewardsControllerTest {
     }
 
     @Test
+    @DisplayName("Default to last three months when dates are missing")
     void shouldDefaultToLastThreeMonthsWhenDatesAreMissing() throws Exception {
         mockMvc.perform(get("/api/rewards/customers/1"))
                 .andExpect(status().isOk())
@@ -50,6 +53,7 @@ class RewardsControllerTest {
     }
 
     @Test
+    @DisplayName("Reject invalid date range")
     void shouldRejectInvalidDateRange() throws Exception {
         mockMvc.perform(get("/api/rewards/customers/1")
                         .param("startDate", "2026-04-01")
@@ -59,6 +63,7 @@ class RewardsControllerTest {
     }
 
     @Test
+    @DisplayName("Return not found for unknown customer")
     void shouldReturnNotFoundForUnknownCustomer() throws Exception {
         mockMvc.perform(get("/api/rewards/customers/999")
                         .param("startDate", "2026-01-01")

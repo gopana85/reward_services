@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +23,7 @@ class RewardsServiceTest {
     private RewardsService rewardsService;
 
     @Test
+    @DisplayName("Aggregate monthly and total rewards")
     void shouldAggregateMonthlyAndTotalRewards() {
         assertEquals(new BigDecimal("386.65"), rewardsService.calculateRewardsForCustomer(1L,
                 LocalDate.of(2026, 1, 1),
@@ -29,6 +31,7 @@ class RewardsServiceTest {
     }
 
     @Test
+    @DisplayName("Use last three months when dates are missing")
     void shouldUseLastThreeMonthsWhenDatesAreMissing() {
         assertEquals("2026-01-09", rewardsService.calculateRewardsForCustomer(1L, null, null).getPeriodStartDate());
         assertEquals("2026-04-09", rewardsService.calculateRewardsForCustomer(1L, null, null).getPeriodEndDate());
