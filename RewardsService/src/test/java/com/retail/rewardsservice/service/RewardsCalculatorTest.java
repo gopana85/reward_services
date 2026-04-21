@@ -12,8 +12,10 @@ class RewardsCalculatorTest {
     private final RewardsCalculator rewardsCalculator = new RewardsCalculator();
 
     @Test
-    @DisplayName("Calculate points for amount above 50 but below or equal to 100")
-    void shouldCalculatePointsForAmountAboveFifty() {
+    @DisplayName("Return zero points at or below 50 boundary")
+    void shouldReturnZeroPointsAtBoundary() {
+        assertEquals(new BigDecimal("0"), rewardsCalculator.calculateRewardPoints(new BigDecimal("0")));
+        assertEquals(new BigDecimal("0"), rewardsCalculator.calculateRewardPoints(new BigDecimal("50.00")));
         assertEquals(new BigDecimal("0.99"), rewardsCalculator.calculateRewardPoints(new BigDecimal("50.99")));
     }
 
